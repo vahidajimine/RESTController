@@ -20,7 +20,9 @@ Makes a REST call to a server. `method`, `contentType` and `isSuccess` are optio
  - parameter `isSuccess`: a `string` that is the `key` of the `(key:value)` in the `JSON` data result. It is usually "success"
 
 ##### Function Delclaration
-`func restCall (params : [String: String], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil)`
+```swift
+func restCall (params : [String: String], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil)
+```
 
 ## RESTControllerProtocol
 This `protocol` contains the functions that handles what do to with the data recieved from the server on a *success* or *fail*.
@@ -37,10 +39,12 @@ The REST call was successful and returned a valid JSON result and was able to co
 func didReceiveAPIResults(results: [String: AnyObject]!, url: String)
 ```
 
-#### `func didNotReceiveAPIResults`
+#### func didNotReceiveAPIResults
 The REST call was unsuccessful. This is defaulted to do nothing, but you may want to add addtional functionality later.
 - parameter `error`: the error string
 - parameter `url`:   the server url
 
 ##### Function Declaration
-`func didNotReceiveAPIResults(error: String, url: String)`
+```swift
+func didNotReceiveAPIResults(error: String, url: String)
+```
