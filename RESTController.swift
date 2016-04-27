@@ -53,7 +53,7 @@ enum HTTPMethod: String {
     case get = "GET"
 }
 //MARK: ContentType
-/// The HTTP header field for the various MIME types of the body of the request (used with POST and PUT requests)
+/// The HTTP header field for the various MIME types of the body of the request (used with `POST` and `PUT` requests)
 enum ContentType: String {
     
     case json = "application/json"
