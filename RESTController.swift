@@ -12,7 +12,7 @@ import Foundation
  */
 protocol RESTControllerProtocol {
     /**
-     The REST call was successful and returned a valid JSON result and was able to convert it to a [Key:Value] pair dictionary.
+     The REST call was successful and returned a valid JSON result and was able to convert it to a `[key:value]` pair dictionary.
      
      - parameter results: the JSON data in a dictionary format
      - parameter url:     the server url in a string format
