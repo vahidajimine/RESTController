@@ -97,7 +97,7 @@ class RESTController {
      - parameter contentType: only supports json and urlEncode currently. Default value is .json
      - parameter isSuccess: a string that is the key of the (key:value) in the JSON data result. It is usually "success"
      */
-    func restCall(params : [String: String], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
+    func restCall(params : [String: AnyObject], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
         
         //Checks to see if the URL string is valid
         guard let tempURL = NSURL(string: url) else {
