@@ -38,7 +38,7 @@ class RESTController {
      - parameter contentType: only supports json and urlEncode currently. Default value is .json
      - parameter isSuccess: a string that is the key of the (key:value) in the JSON data result. It is usually "success"
      */
-    func restCall(params : [String: AnyObject], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
+    func restCall(params: [String: AnyObject], url: String, headers: [String:String]? = nil, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
         
         //Checks to see if the URL string is valid
         guard let tempURL = URL(string: url) else {
@@ -50,6 +50,13 @@ class RESTController {
         let session = URLSession(configuration: URLSessionConfiguration.default)
         var request: URLRequest = URLRequest(url: tempURL)
         request.httpMethod = method.rawValue
+        
+        if let hasHeaders = headers {
+            for (key,value) in hasHeaders{
+                request.addValue(value, forHTTPHeaderField: key)
+            }
+        }
+        
         do {
             //TODO: Add GET protocols
             switch contentType {
