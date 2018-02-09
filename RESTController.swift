@@ -100,22 +100,22 @@ class RESTController {
     func restCall(params : [String: AnyObject], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
         
         //Checks to see if the URL string is valid
-        guard let tempURL = NSURL(string: url) else {
-            self.runDelegateProtocolFunction("Error: could not create URL from string", error: "", url: url)
+        guard let tempURL = URL(string: url) else {
+            self.runDelegateProtocolFunction(printString: "Error: could not create URL from string", error: "", url: url)
             return
         }
         //Creates the session and request
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-        let request: NSMutableURLRequest = NSMutableURLRequest(URL: tempURL)
-        request.HTTPMethod = method.rawValue
-        
+        //let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        var request: URLRequest = URLRequest(url: tempURL)
+        request.httpMethod = method.rawValue
         do {
             //TODO: Add GET protocols
             switch contentType {
             case .json:
                 //Converts the params object to JSON in the HTTP request
-                let jsonPost = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.PrettyPrinted)
-                request.HTTPBody = jsonPost
+                let jsonPost = try JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted)
+                request.httpBody = jsonPost
                 request.addValue(ContentType.json.rawValue , forHTTPHeaderField: ContentType.headerFieldValue)
             case .urlEncode:
                 //Convert the Dictionary to a String
@@ -129,7 +129,7 @@ class RESTController {
                     }
                 }
                 //Must encode the request to HTTPRequest
-                request.HTTPBody = postValues.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+                request.httpBody = postValues.data(using: String.Encoding.utf8, allowLossyConversion: true)
                 //Needed to let the Server know what kind of data that is being sent
                 request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             case .multipartForm:
@@ -142,23 +142,23 @@ class RESTController {
                 return
             }
         } catch {
-            self.runDelegateProtocolFunction("Error: could not convert params to JSON", error: "", url: url)
+            self.runDelegateProtocolFunction(printString: "Error: could not convert params to JSON", error: "", url: url)
             return
         }
         
-        let task = session.dataTaskWithRequest(request, completionHandler: {
+        let task = session.dataTask(with: request, completionHandler: {
             (data, response, error) -> Void in
             
             //First checks to see if the data is not nil
             guard let resultData = data else {
-                self.runDelegateProtocolFunction("Error: did not recieve data", error: "", url: url)
+                self.runDelegateProtocolFunction(printString: "Error: did not recieve data", error: "", url: url)
                 return
             }
             
             //Checks to see if there were any errors in the request
             guard error == nil else {
-                self.runDelegateProtocolFunction("Error in calling POST on \(request)", error: "\(request)", url: url)
-                print(error)
+                self.runDelegateProtocolFunction(printString:"Error in calling POST on \(request)", error: "\(request)", url: url)
+                print(error!)
                 return
             }
             
@@ -166,17 +166,17 @@ class RESTController {
             
             //Try to convert the data stream to a dictionary
             do {
-                json = try NSJSONSerialization.JSONObjectWithData(resultData, options: .MutableLeaves) as! [String: AnyObject]
+                json = try JSONSerialization.jsonObject(with: resultData, options: .mutableLeaves) as! [String: AnyObject]
             } catch {
-                let jsonString = String(data: resultData, encoding: NSUTF8StringEncoding)
-                self.runDelegateProtocolFunction("Error could not parse JSON: '\(jsonString)'", error: jsonString!, url: url)
+                let jsonString = String(data: resultData, encoding: String.Encoding.utf8)
+                self.runDelegateProtocolFunction(printString: "Error could not parse JSON: '\(jsonString!)'", error: jsonString!, url: url)
                 return
             }
             
             if let success = isSuccess {
-                self.runDelegateProtocolFunction("\"\(success)\": \(json[success])", results: json, url: url)
+                self.runDelegateProtocolFunction(printString: "\"\(success)\": \(json[success]!)", results: json, url: url)
             } else {
-                self.runDelegateProtocolFunction("REST call was successful", results: json, url: url)
+                self.runDelegateProtocolFunction(printString: "REST call was successful", results: json, url: url)
             }
             
         })
@@ -194,9 +194,7 @@ class RESTController {
      */
     private func runDelegateProtocolFunction(printString: String, error: String, url: String) {
         print(printString)
-        dispatch_async(dispatch_get_main_queue(), {
-            self.delegate.didNotReceiveAPIResults(error, url: url)
-        })
+        DispatchQueue.main.async{ self.delegate.didNotReceiveAPIResults(error: error, url: url) }
     }
     
     /**
@@ -208,9 +206,7 @@ class RESTController {
      */
     private func runDelegateProtocolFunction(printString: String, results: [String: AnyObject]!, url: String) {
         print(printString)
-        dispatch_async(dispatch_get_main_queue(), {
-            self.delegate.didReceiveAPIResults(results, url: url)
-        })
+        DispatchQueue.main.async {self.delegate.didReceiveAPIResults(results: results, url: url) }
     }
 }
 
