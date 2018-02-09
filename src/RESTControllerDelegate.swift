@@ -5,11 +5,11 @@
 //  Copyright © 2018 Vahid Ajimine. All rights reserved.
 
 import Foundation
-//MARK: RESTControllerProtocol
+//MARK: RESTControllerDelegate
 /**
- *  The protocol to make sure that a class properly defines these set functions
+ *  The delegate methods to make sure that a class properly defines these set functions
  */
-protocol RESTControllerProtocol {
+protocol RESTControllerDelegate {
     /**
      The REST call was successful and returned a valid JSON result and was able to convert it to a `[key:value]` pair dictionary.
      

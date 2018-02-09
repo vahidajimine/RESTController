@@ -6,7 +6,7 @@
 
 import Foundation
 //MARK: Default Method
-extension RESTControllerProtocol {
+extension RESTControllerDelegate {
     /**
      The REST call was unsuccessful. This is defaulted to do nothing, but you may want to add addtional functionality later
      

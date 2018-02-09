@@ -14,7 +14,7 @@ import Foundation
 class RESTController {
     
     /// The delegate functions for this class
-    var delegate: RESTControllerProtocol
+    var delegate: RESTControllerDelegate
     
     /**
      Initializes this class
@@ -23,7 +23,7 @@ class RESTController {
      
      - returns: creates a REST call object
      */
-    init(delegate: RESTControllerProtocol) {
+    init(delegate: RESTControllerDelegate) {
         self.delegate = delegate
     }
     
