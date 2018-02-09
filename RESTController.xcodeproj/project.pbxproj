@@ -10,6 +10,11 @@
 		04F05013202DFE9600F6BC8C /* RESTController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F05009202DFE9600F6BC8C /* RESTController.framework */; };
 		04F05018202DFE9600F6BC8C /* RESTControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F05017202DFE9600F6BC8C /* RESTControllerTests.swift */; };
 		04F0501A202DFE9600F6BC8C /* RESTController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F0500C202DFE9600F6BC8C /* RESTController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04F05028202E009F00F6BC8C /* RESTController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F05023202E009E00F6BC8C /* RESTController.swift */; };
+		04F05029202E009F00F6BC8C /* RESTControllerDelegateExtensionDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F05024202E009F00F6BC8C /* RESTControllerDelegateExtensionDefault.swift */; };
+		04F0502A202E009F00F6BC8C /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F05025202E009F00F6BC8C /* ContentType.swift */; };
+		04F0502B202E009F00F6BC8C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F05026202E009F00F6BC8C /* HTTPMethod.swift */; };
+		04F0502C202E009F00F6BC8C /* RESTControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F05027202E009F00F6BC8C /* RESTControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		04F05012202DFE9600F6BC8C /* RESTControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RESTControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F05017202DFE9600F6BC8C /* RESTControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTControllerTests.swift; sourceTree = "<group>"; };
 		04F05019202DFE9600F6BC8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F05023202E009E00F6BC8C /* RESTController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTController.swift; sourceTree = "<group>"; };
+		04F05024202E009F00F6BC8C /* RESTControllerDelegateExtensionDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTControllerDelegateExtensionDefault.swift; sourceTree = "<group>"; };
+		04F05025202E009F00F6BC8C /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
+		04F05026202E009F00F6BC8C /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		04F05027202E009F00F6BC8C /* RESTControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +81,11 @@
 		04F0500B202DFE9600F6BC8C /* RESTController */ = {
 			isa = PBXGroup;
 			children = (
+				04F05025202E009F00F6BC8C /* ContentType.swift */,
+				04F05026202E009F00F6BC8C /* HTTPMethod.swift */,
+				04F05023202E009E00F6BC8C /* RESTController.swift */,
+				04F05027202E009F00F6BC8C /* RESTControllerDelegate.swift */,
+				04F05024202E009F00F6BC8C /* RESTControllerDelegateExtensionDefault.swift */,
 				04F0500C202DFE9600F6BC8C /* RESTController.h */,
 				04F0500D202DFE9600F6BC8C /* Info.plist */,
 			);
@@ -148,6 +163,7 @@
 				TargetAttributes = {
 					04F05008202DFE9600F6BC8C = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					04F05011202DFE9600F6BC8C = {
@@ -196,6 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F0502C202E009F00F6BC8C /* RESTControllerDelegate.swift in Sources */,
+				04F0502B202E009F00F6BC8C /* HTTPMethod.swift in Sources */,
+				04F05029202E009F00F6BC8C /* RESTControllerDelegateExtensionDefault.swift in Sources */,
+				04F05028202E009F00F6BC8C /* RESTController.swift in Sources */,
+				04F0502A202E009F00F6BC8C /* ContentType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +355,7 @@
 		04F0501E202DFE9600F6BC8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -347,6 +369,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vahid.ajimine.LLC.RESTController;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +378,7 @@
 		04F0501F202DFE9600F6BC8C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -376,6 +400,7 @@
 		04F05021202DFE9600F6BC8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HW6YHQ5GT4;
 				INFOPLIST_FILE = RESTControllerTests/Info.plist;
@@ -390,6 +415,7 @@
 		04F05022202DFE9600F6BC8C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HW6YHQ5GT4;
 				INFOPLIST_FILE = RESTControllerTests/Info.plist;
