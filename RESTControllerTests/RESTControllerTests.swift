@@ -11,6 +11,8 @@ import XCTest
 
 class RESTControllerTests: XCTestCase {
     
+    let testClassDelegate = TestDelegate()
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,9 +23,29 @@ class RESTControllerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRestCall() {
+        let testRestController = RESTController(delegate: testClassDelegate)
+        
+        self.testClassDelegate.asyncExpectation = expectation(description: "JSON call with jsonplaceholder post call 1 return")
+        
+        testRestController.restCall(params: [:], url: "https://jsonplaceholder.typicode.com/posts/1")
+        
+        waitForExpectations(timeout: 1, handler: { (testError) in
+            if let error = testError{
+                XCTFail("waitForExpectations errored with \(error)")
+            }
+            guard let errorString = self.testClassDelegate.errorString else {
+                XCTFail("Expected result to be successful")
+                return
+            }
+            guard let result = self.testClassDelegate.results else {
+                XCTFail("Expected result to be successful")
+                return
+            }
+            print(result)
+            print(errorString)
+            XCTAssertTrue(true)
+        })
     }
     
     func testPerformanceExample() {
@@ -33,4 +55,36 @@ class RESTControllerTests: XCTestCase {
         }
     }
     
+    //MARK: - RESTControllerDelegate
+    class TestDelegate: RESTControllerDelegate{
+       
+        
+        var results:[String:AnyObject]?
+        var errorString:String?
+        
+        var asyncExpectation: XCTestExpectation?
+        init() {
+        }
+        
+        func didNotReceiveAPIResults(error: String, url: String) {
+            guard let expectation = asyncExpectation else {
+                XCTFail("Test Delegate didNotReceiveAPIResults not set up properly")
+                return
+            }
+            errorString = error
+            results = nil
+            expectation.fulfill()
+        }
+        
+        func didReceiveAPIResults(results: [String : AnyObject], url: String) {
+            guard let expectation = asyncExpectation else {
+                XCTFail("Test Delegate didReceiveAPIResults not set up properly")
+                return
+            }
+            errorString = nil
+            self.results = results
+            expectation.fulfill()
+        }
+
+    }
 }

@@ -14,7 +14,7 @@ import Foundation
 class RESTController {
     
     /// The delegate functions for this class
-    var delegate: RESTControllerDelegate
+    weak var delegate: RESTControllerDelegate?
     
     /**
      Initializes this class
@@ -143,7 +143,7 @@ class RESTController {
      */
     private func runDelegateProtocolFunction(printString: String, error: String, url: String) {
         print(printString)
-        DispatchQueue.main.async{ self.delegate.didNotReceiveAPIResults(error: error, url: url) }
+        DispatchQueue.main.async{ self.delegate?.didNotReceiveAPIResults(error: error, url: url) }
     }
     
     /**
@@ -155,7 +155,7 @@ class RESTController {
      */
     private func runDelegateProtocolFunction(printString: String, results: [String: AnyObject]!, url: String) {
         print(printString)
-        DispatchQueue.main.async {self.delegate.didReceiveAPIResults(results: results, url: url) }
+        DispatchQueue.main.async {self.delegate?.didReceiveAPIResults(results: results, url: url) }
     }
 }
 
