@@ -1,69 +1,10 @@
 //
 //  RESTController.swift
-//  DMTables
 //
 //  Created by Vahid Ajimine on 3/31/16.
 //  Copyright © 2016 Vahid Ajimine. All rights reserved.
 
 import Foundation
-//MARK: RESTControllerProtocol
-/**
- *  The protocol to make sure that a class properly defines these set functions
- */
-protocol RESTControllerProtocol {
-    /**
-     The REST call was successful and returned a valid JSON result and was able to convert it to a `[key:value]` pair dictionary.
-     
-     - parameter results: the JSON data in a dictionary format
-     - parameter url:     the server url in a string format
-     */
-    func didReceiveAPIResults(results: [String: AnyObject]!, url: String)
-    
-    /**
-     The REST call was unsuccessful. This is defaulted to do nothing, but you may want to add addtional functionality later
-     
-     - parameter error: the error string
-     - parameter url:   the server url
-     */
-    func didNotReceiveAPIResults(error: String, url: String)
-}
-//MARK: Default Method
-extension RESTControllerProtocol {
-    /**
-     The REST call was unsuccessful. This is defaulted to do nothing, but you may want to add addtional functionality later
-     
-     - parameter error: the error string
-     - parameter url:   the server url
-     */
-    func didNotReceiveAPIResults(error: String, url: String) {
-        //purposely left empty
-    }
-}
-
-//MARK: - ENUMS
-//MARK: HTTPMethod
-/**
- All the various HTTP call requests
- 
- - post: makes a post call
- - get:  makes a get call
- */
-enum HTTPMethod: String {
-    case post = "POST"
-    case get = "GET"
-}
-//MARK: ContentType
-/// The HTTP header field for the various MIME types of the body of the request (used with `POST` and `PUT` requests)
-enum ContentType: String {
-    
-    case json = "application/json"
-    case urlEncode = "application/x-www-form-urlencoded"
-    case multipartForm = "multipart/form-data"
-    case textHTML = "text/html"
-    
-    static let headerFieldValue = "Content-Type"
-}
-
 //MARK: -
 /** 
  The class that makes JSON RESTful calls to a server
