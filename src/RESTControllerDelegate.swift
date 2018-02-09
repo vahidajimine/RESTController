@@ -1,5 +1,5 @@
 //
-//  RESTController/RESTControllerProtocol.swift
+//  RESTController/RESTControllerDelegate.swift
 //
 //  Created by Vahid Ajimine on 2/9/16.
 //  Copyright © 2018 Vahid Ajimine. All rights reserved.

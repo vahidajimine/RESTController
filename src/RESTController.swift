@@ -33,7 +33,7 @@ class RESTController {
      Note: this function only currently works for the Content-Type `application/json`. Additional content types will
      
      - parameter params: A dictionary of `key:value` parameters to be passed in the url rest call
-     - parameter url:    the string of the url for the server
+     - parameter url: the string of the url for the server
      - parameter headers: A dictionary of `key:value` to be added to the http header call
      - parameter method: either `POST` or `GET`. Default is POST
      - parameter contentType: only supports json and urlEncode currently. Default value is .json
@@ -133,7 +133,7 @@ class RESTController {
         task.resume()
     }
     
-    //MARK: Helper Functions
+    //MARK: - Helper Functions
     /**
      This runs the delegate method `self.delegate.didNotReceiveAPIResults` and dispatches it to the main thread
      

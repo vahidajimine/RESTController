@@ -6,8 +6,7 @@
 
 import Foundation
 
-//MARK: - ENUMS
-//MARK: HTTPMethod
+//MARK: ENUMS - HTTPMethod
 /**
  All the various HTTP call requests
  
