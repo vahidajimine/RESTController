@@ -11,7 +11,7 @@ import Foundation
  
  NOTE: Only POST calls are supported at this time.
 */
-class RESTController {
+public class RESTController {
     
     /// The delegate functions for this class
     weak var delegate: RESTControllerDelegate?
@@ -39,7 +39,7 @@ class RESTController {
      - parameter contentType: only supports json and urlEncode currently. Default value is .json
      - parameter isSuccess: a string that is the key of the (key:value) in the JSON data result. It is usually "success"
      */
-    func restCall(url: String, headers: [String:String]? = nil, params: [String: String] = [:], method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
+    public func restCall(url: String, headers: [String:String]? = nil, params: [String: String] = [:], method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil) {
         
         //Checks to see if the URL string is valid
         guard let tempURL = URL(string: url) else {

@@ -9,7 +9,7 @@ import Foundation
 /**
  *  The delegate methods to make sure that a class properly defines these set functions
  */
-protocol RESTControllerDelegate: class {
+public protocol RESTControllerDelegate: class {
     /**
      The REST call was successful and returned a valid JSON result and was able to convert it to a `[key:value]` pair dictionary.
      

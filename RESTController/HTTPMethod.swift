@@ -13,7 +13,7 @@ import Foundation
  - post: makes a post call
  - get:  makes a get call
  */
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case post = "POST"
     case get = "GET"
 }
