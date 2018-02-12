@@ -14,7 +14,7 @@ import Foundation
 public class RESTController {
     
     /// The delegate functions for this class
-    weak var delegate: RESTControllerDelegate?
+    public weak var delegate: RESTControllerDelegate?
     
     /**
      Initializes this class
@@ -23,7 +23,7 @@ public class RESTController {
      
      - returns: creates a REST call object
      */
-    init(delegate: RESTControllerDelegate) {
+    public init(delegate: RESTControllerDelegate) {
         self.delegate = delegate
     }
     
