@@ -13,7 +13,7 @@ import Foundation
 */
 public class RESTController {
     
-    /// The delegate functions for this class
+    /// The delegate for this class
     public weak var delegate: RESTControllerDelegate?
     
     /**
@@ -30,11 +30,11 @@ public class RESTController {
     /**
      Make a REST call to a server. method, contentType and isSuccess are optional parameters
      
-     Note: this function only currently works for the Content-Type `application/json`. Additional content types will
+     Note: this function only currently works for the Content-Type `application/json` for `POST` calls in addition to `GET` method calls
      
      - parameter url: the string of the url for the server
      - parameter headers: A dictionary of `key:value` to be added to the http header call
-     - parameter params: A dictionary of `key:value` parameters to be passed in the url rest call
+     - parameter params: A dictionary of `key:value` for additional parameters to be passed in the url rest call. This parameter is the same as `headers` if the method is `GET`. Default is `[:]`.
      - parameter method: either `POST` or `GET`. Default is POST
      - parameter contentType: only supports json and urlEncode currently. Default value is .json
      - parameter isSuccess: a string that is the key of the (key:value) in the JSON data result. It is usually "success"

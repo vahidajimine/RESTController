@@ -1,31 +1,32 @@
 # Making REST Calls Reusable
 
-In most of my projects, I have to do some kind of server-data call and it normally uses the RESTful API. Thus I created a `RESTController` class that makes the URL calls without me having to recode up the `NSURLSession` each time with all the error checking involved.
+In most of my projects, I have to do some kind of server-data call and it normally uses the RESTful API. Thus I created a `RESTController` class that makes the URL calls without me having to recode up the `URLSession` each time with all the error checking involved. I updated this code to Swift 4.0 and it should be compatible with iOS 9.0+.
 
-The `RESTController` class and makes REST calls to a server that expects JSON data as a return type. It then converts the JSON results to a `Dictionary`. The `RESTControllerProtocol` allows users to later define what to do on an error, or success.
+The `RESTController` class and makes REST calls to a server that expects JSON data as a return type. It then converts the JSON results to a `Dictionary`. The `RESTControllerDelegate` allows users to later define what to do on an error, or success.
 
 ## RESTController
 
-This is where the bulk of the work is done. This uses the `RESTControllerProtocol` as its delegate.
+This is where the bulk of the work is done. This uses the `RESTControllerDelegate` as its delegate.
 
 ### Primary Functions
 #### func restCall 
-Makes a REST call to a server. `method`, `contentType` and `isSuccess` are optional parameters. 
+Makes a REST call to a server. `method`, `headers`, `params`, `contentType` and `isSuccess` are optional parameters. 
      
-*Note:* this function only currently works for the Content-Type `application/json`. Additional content types will be added as needed. This does not yet have functionality for `GET` methods.
- - parameter `params`: A dictionary of `key:value` parameters to be passed in the url rest call
- - parameter `url`:    the string of the url for the server
- - parameter `method`: either `POST` or `GET`. Default is `POST`
+*Note:* this function only currently works for the Content-Type `application/json`.
+ - parameter `url`:         the string of the url for the server
+ - parameter `headers`:     A dictionary of `key:value` to be added to the http header call
+ - parameter `params`:      A dictionary of `key:value` parameters to be passed in the url rest call
+ - parameter `method`:      either `POST` or `GET`. Default is `POST`
  - parameter `contentType`: only supports json and urlEncode currently. Default value is .json
- - parameter `isSuccess`: a `string` that is the `key` of the `(key:value)` in the `JSON` data result. It is usually "success"
+ - parameter `isSuccess`:   a `string` that is the `key` of the `(key:value)` in the `JSON` data result. It is usually "success"
 
 ##### Function Delclaration
 ```swift
-func restCall (params : [String: String], url : String, method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil)
+func restCall(url: String, headers: [String:String]? = nil, params: [String: String] = [:], method: HTTPMethod = HTTPMethod.post, contentType: ContentType = ContentType.json, isSuccess: String? = nil)
 ```
 
-## RESTControllerProtocol
-This `protocol` contains the functions that handles what do to with the data recieved from the server on a *success* or *fail*.
+## RESTControllerDelegate
+This `delegate` contains the functions that handles what do to with the data recieved from the server on a *success* or *fail*.
 
 ### Delegate Functions
 
